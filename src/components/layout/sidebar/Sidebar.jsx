@@ -6,11 +6,14 @@ import {
   LucidePlus,
   LucideSettings,
 } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import Context from "../../../context/Context";
 import "./Sidebar.css";
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
+
+  const { prevPrompts } = useContext(Context);
 
   const toggleSidebar = () => {
     setCollapsed((prev) => !prev);
@@ -31,12 +34,14 @@ export default function Sidebar() {
 
           <span className="recent">
             <h2>Recent</h2>
-            <ul className="recent-list">
-              <li>
-                <LucideMessageSquareCode />
-                <span>What is React...</span>
-              </li>
-            </ul>
+            {prevPrompts.map((prompt, index) => (
+              <ul key={index} className="recent-list">
+                <li>
+                  <LucideMessageSquareCode />
+                  <span>{prompt}</span>
+                </li>
+              </ul>
+            ))}
           </span>
         </div>
       </section>

@@ -5,17 +5,21 @@ const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [promptTerm, setPromptTerm] = useState("");
-  const [resultData, setResultData] = useState([]);
+  const [resultData, setResultData] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [recentPrompt, setRecentPrompt] = useState("");
+  const [prevPrompts, setPrevPrompts] = useState([]);
 
   const onSent = async () => {
     setLoading(true);
     const response = await gemini(promptTerm);
-    console.log(response);
-    setLoading(false);
     setResultData(response);
+    setLoading(false);
+    setRecentPrompt(promptTerm);
+    setPrevPrompts((prev) => [...prev, recentPrompt]);
     setShowResult(true);
+    setPromptTerm("");
   };
 
   const value = {
@@ -25,6 +29,8 @@ export const ContextProvider = ({ children }) => {
     resultData,
     showResult,
     loading,
+    recentPrompt,
+    prevPrompts,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

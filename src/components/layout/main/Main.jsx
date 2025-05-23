@@ -7,20 +7,32 @@ import {
   LucideMic,
   LucideSendHorizontal,
   LucideSparkles,
-  LucideUser,
 } from "lucide-react";
 import { useContext } from "react";
 import Context from "../../../context/Context";
+import Loader from "../../ui/Loader/Loader";
+import TypingDisplay from "../../ui/TypingDisplay";
 import "./Main.css";
 
 export default function Main() {
-  const { promptTerm, setPromptTerm, onSent, resultData, showResult } =
-    useContext(Context);
+  const {
+    promptTerm,
+    setPromptTerm,
+    onSent,
+    resultData,
+    showResult,
+    loading,
+    recentPrompt,
+  } = useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSent();
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <main className="main">
@@ -33,13 +45,15 @@ export default function Main() {
         <section className="result">
           <div className="result-title">
             <img src="avatar.png" alt="" className="avatar" />
-            <h3 className="prompt-term">{promptTerm}</h3>
+            <h3 className="prompt-term">{recentPrompt}</h3>
           </div>
           <div className="result-content">
             <span>
               <LucideSparkles className="sparkles" />
             </span>
-            <p className="result-data">{resultData}</p>
+            <p className="result-data">
+              <TypingDisplay text={resultData} />
+            </p>
           </div>
         </section>
       ) : (
@@ -82,8 +96,15 @@ export default function Main() {
           />
           <div className="prompt-actions">
             <LucideImagePlus className="prompt-icon" />
-            <LucideMic className="prompt-icon" />
-            <LucideSendHorizontal className="prompt-icon" />
+            {promptTerm ? (
+              <button className="prompt-icon" type="submit">
+                <LucideSendHorizontal />
+              </button>
+            ) : (
+              <button className="prompt-icon">
+                <LucideMic />
+              </button>
+            )}
           </div>
         </form>
         <p className="footer-text">
