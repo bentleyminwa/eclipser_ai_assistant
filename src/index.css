@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+:root {
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+#root {
+  font-family: "Outfit", sans-serif;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(100px, auto) 1fr;
+  gap: 1rem;
+}
