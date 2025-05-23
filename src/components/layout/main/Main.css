@@ -4,6 +4,11 @@
   padding: 2rem 2rem 0 0;
 }
 
+.avatar {
+  width: 50px;
+  height: 50px;
+}
+
 .top-main {
   display: flex;
   justify-content: space-between;
@@ -15,11 +20,6 @@
   font-size: 1.5rem;
   font-weight: 300;
   color: #555;
-}
-
-.top-main .avatar {
-  width: 50px;
-  height: 50px;
 }
 
 .main-content {
@@ -112,4 +112,43 @@
   color: #999;
   text-align: center;
   margin-top: 2rem;
+}
+
+.result {
+  padding: 0% 10%;
+  max-height: 60vh;
+  overflow-y: scroll;
+  margin: 0 auto;
+}
+
+.result::-webkit-scrollbar {
+  display: none;
+}
+
+.result-title {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: end;
+  gap: 1rem;
+}
+
+.result-title h3 {
+  font-weight: 400;
+}
+
+.result-content {
+  margin-top: 3rem;
+  display: flex;
+  align-items: start;
+  gap: 3rem;
+}
+
+.sparkles {
+  color: purple;
+}
+
+.result-data {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.8;
 }
