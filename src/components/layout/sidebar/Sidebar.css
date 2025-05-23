@@ -7,6 +7,21 @@
   justify-content: space-between;
 }
 
+.sidebar span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: max-width 0.3s linear, opacity 0.3s linear;
+  max-width: auto;
+  opacity: 1;
+}
+
+/* When collapsed */
+.sidebar.collapsed span {
+  max-width: 0;
+  opacity: 0;
+}
+
 .top-sidebar__menu {
   width: fit-content;
   cursor: pointer;

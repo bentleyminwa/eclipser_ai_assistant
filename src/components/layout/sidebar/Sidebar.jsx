@@ -6,14 +6,21 @@ import {
   LucidePlus,
   LucideSettings,
 } from "lucide-react";
+import { useState } from "react";
 import "./Sidebar.css";
 
 export default function Sidebar() {
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggleSidebar = () => {
+    setCollapsed((prev) => !prev);
+  };
+
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
       <section className="top-sidebar">
         <div className="top-sidebar__menu">
-          <LucideAlignJustify />
+          <LucideAlignJustify onClick={toggleSidebar} />
         </div>
 
         <div className="top-sidebar__content">
@@ -21,7 +28,8 @@ export default function Sidebar() {
             <LucidePlus />
             <span>New chat</span>
           </button>
-          <div className="recent">
+
+          <span className="recent">
             <h2>Recent</h2>
             <ul className="recent-list">
               <li>
@@ -29,7 +37,7 @@ export default function Sidebar() {
                 <span>What is React...</span>
               </li>
             </ul>
-          </div>
+          </span>
         </div>
       </section>
 
