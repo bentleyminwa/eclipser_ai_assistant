@@ -11,14 +11,28 @@ export const ContextProvider = ({ children }) => {
   const [recentPrompt, setRecentPrompt] = useState("");
   const [prevPrompts, setPrevPrompts] = useState([]);
 
-  const onSent = async () => {
+  const newChat = () => {
+    setLoading(false);
+    setShowResult(false);
+  };
+
+  const onSent = async (prompt) => {
+    setResultData("");
     setLoading(true);
-    const response = await gemini(promptTerm);
+    setShowResult(true);
+
+    let response;
+    if (prompt !== undefined) {
+      response = await gemini(prompt);
+      setRecentPrompt(prompt);
+    } else {
+      setPrevPrompts((prev) => [...prev, promptTerm]);
+      setRecentPrompt(promptTerm);
+      response = await gemini(promptTerm);
+    }
+
     setResultData(response);
     setLoading(false);
-    setRecentPrompt(promptTerm);
-    setPrevPrompts((prev) => [...prev, recentPrompt]);
-    setShowResult(true);
     setPromptTerm("");
   };
 
@@ -30,7 +44,9 @@ export const ContextProvider = ({ children }) => {
     showResult,
     loading,
     recentPrompt,
+    setRecentPrompt,
     prevPrompts,
+    newChat,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

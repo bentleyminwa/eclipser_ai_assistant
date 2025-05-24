@@ -13,10 +13,15 @@ import "./Sidebar.css";
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
-  const { prevPrompts } = useContext(Context);
+  const { prevPrompts, setRecentPrompt, onSent, newChat } = useContext(Context);
 
   const toggleSidebar = () => {
     setCollapsed((prev) => !prev);
+  };
+
+  const loadPrompt = async (prompt) => {
+    setRecentPrompt(prompt);
+    await onSent(prompt);
   };
 
   return (
@@ -27,18 +32,18 @@ export default function Sidebar() {
         </div>
 
         <div className="top-sidebar__content">
-          <button className="new-chat">
+          <button className="new-chat" onClick={newChat}>
             <LucidePlus />
             <span>New chat</span>
           </button>
 
           <span className="recent">
             <h2>Recent</h2>
-            {prevPrompts.map((prompt, index) => (
+            {prevPrompts.map((item, index) => (
               <ul key={index} className="recent-list">
-                <li>
+                <li onClick={() => loadPrompt(item)}>
                   <LucideMessageSquareCode />
-                  <span>{prompt}</span>
+                  <span>{item.slice(0, 10)}...</span>
                 </li>
               </ul>
             ))}

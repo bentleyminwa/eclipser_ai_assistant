@@ -30,10 +30,6 @@ export default function Main() {
     onSent();
   };
 
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
     <main className="main">
       <nav className="top-main">
@@ -51,9 +47,13 @@ export default function Main() {
             <span>
               <LucideSparkles className="sparkles" />
             </span>
-            <p className="result-data">
-              <TypingDisplay text={resultData} />
-            </p>
+            {loading ? (
+              <Loader />
+            ) : (
+              <p className="result-data">
+                <TypingDisplay text={resultData} />
+              </p>
+            )}
           </div>
         </section>
       ) : (
@@ -87,6 +87,7 @@ export default function Main() {
             prompt
           </label>
           <input
+            required
             type="text"
             id="prompt"
             name="prompt"
