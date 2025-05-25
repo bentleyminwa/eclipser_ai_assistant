@@ -26,3 +26,9 @@ ul {
   grid-template-columns: minmax(100px, auto) 1fr;
   gap: 1rem;
 }
+
+@media (max-width: 800px) {
+  #root {
+    grid-template-columns: 1fr;
+  }
+}
