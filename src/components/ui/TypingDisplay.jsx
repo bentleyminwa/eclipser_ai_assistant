@@ -25,7 +25,7 @@ const TypingDisplay = ({ text }) => {
   };
 
   return (
-    <div
+    <p
       className="typing-text"
       dangerouslySetInnerHTML={{ __html: parseFormattedText(displayed) }}
     />

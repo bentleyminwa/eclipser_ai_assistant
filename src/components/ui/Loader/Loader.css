@@ -1,0 +1,22 @@
+.loader {
+  width: 100%;
+}
+
+.loader div {
+  width: inherit;
+  height: 15px;
+  background: linear-gradient(90deg, #e7e7e7, #f5f5f5, #e7e7e7);
+  background-size: 800px 100%;
+  border-radius: 30px;
+  margin-bottom: 10px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -800px 0;
+  }
+  100% {
+    background-position: 800px 0;
+  }
+}

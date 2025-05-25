@@ -50,9 +50,9 @@ export default function Main() {
             {loading ? (
               <Loader />
             ) : (
-              <p className="result-data">
+              <div className="result-data">
                 <TypingDisplay text={resultData} />
-              </p>
+              </div>
             )}
           </div>
         </section>
