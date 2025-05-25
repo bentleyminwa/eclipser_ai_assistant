@@ -30,6 +30,13 @@ export default function Main() {
     onSent();
   };
 
+  const loadCardContent = async (e) => {
+    const paragraph = e.currentTarget.querySelector("p");
+    const content = paragraph.textContent;
+    setPromptTerm(content);
+    await onSent(content);
+  };
+
   return (
     <main className="main">
       <nav className="top-main">
@@ -61,19 +68,19 @@ export default function Main() {
           <h1>Hello, Dev.</h1>
           <p>How can I assist you today?</p>
           <div className="cards">
-            <div className="card">
+            <div className="card" onClick={loadCardContent}>
               <p>Suggest beautiful places to see on an upcoming roadtrip.</p>
               <LucideCompass className="card-icon" />
             </div>
-            <div className="card">
+            <div className="card" onClick={loadCardContent}>
               <p>Briefly summarize this concept: urban planning.</p>
               <LucideLightbulb className="card-icon" />
             </div>
-            <div className="card">
+            <div className="card" onClick={loadCardContent}>
               <p>Brainstorm team bonding activities for our work retreat.</p>
               <LucideBriefcase className="card-icon" />
             </div>
-            <div className="card">
+            <div className="card" onClick={loadCardContent}>
               <p>Tell me about React Js and React Native.</p>
               <LucideCode className="card-icon" />
             </div>
@@ -87,6 +94,7 @@ export default function Main() {
             prompt
           </label>
           <input
+            disabled={loading}
             required
             type="text"
             id="prompt"

@@ -59,6 +59,11 @@
   padding: 2rem;
   border-radius: 20px;
   gap: 1rem;
+  cursor: pointer;
+}
+
+.main-content .card:hover {
+  background-color: #e7e7e7;
 }
 
 .main-content .card .card-icon {
